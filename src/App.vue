@@ -190,7 +190,7 @@
             🧩 强大的插件生态系统
           </h2>
           <p class="text-xl text-white/70 max-w-3xl mx-auto">
-            MoviePilot 采用插件化架构设计，拥有 250+ 官方和社区插件，<br />
+            MoviePilot 采用插件化架构设计，拥有 300+ 官方和社区插件，<br />
             让您可以根据需求自由组合功能，打造专属的媒体管理方案
           </p>
         </div>
@@ -235,7 +235,7 @@
             完美集成
           </h2>
           <p class="text-xl text-white/70 max-w-3xl mx-auto">
-            支持主流媒体服务器、消息通知和下载客户端，无缝融入您现有的媒体生态系统
+            支持主流媒体信息源、媒体服务器、下载器和消息通知渠道，无缝融入您现有的媒体生态系统
           </p>
         </div>
         
@@ -249,7 +249,10 @@
               <img 
                 :src="integration.icon" 
                 :alt="integration.name"
-                class="w-12 h-12 object-contain"
+                :class="[
+                  'w-12 h-12 object-contain',
+                  integration.invertOnDark ? 'invert' : ''
+                ]"
               />
             </div>
             <h3 class="text-white font-medium">{{ integration.name }}</h3>
@@ -271,7 +274,7 @@
         </div>
 
         <!-- Deployment Methods -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div 
             v-for="(method, index) in deploymentMethods" 
             :key="index"
@@ -342,7 +345,7 @@
               <h3 class="text-xl font-bold text-white">MoviePilot</h3>
             </div>
             <p class="text-white/70 mb-6 max-w-md">
-              基于插件化架构的新一代智能媒体库管理工具，让您的影视收藏管理变得简单高效。
+              基于插件化架构的新一代智能媒体库管理工具，让您的影视收藏管理变得智能高效。
             </p>
             <div class="flex space-x-4">
               <a href="https://github.com/jxxghp/MoviePilot" class="text-white/60 hover:text-white transition-colors">
@@ -377,7 +380,7 @@
         
         <div class="border-t border-white/10 mt-12 pt-8 text-center">
           <p class="text-white/60">
-            © 2025 MoviePilot. 开源项目，遵循 GPL-3.0 许可证。
+            © 2026 MoviePilot. 开源项目，遵循 GPL-3.0 许可证。
           </p>
         </div>
       </div>
@@ -398,6 +401,16 @@ import transmissionIcon from './assets/transmission.png'
 import wechatIcon from './assets/wechat.png'
 import telegramIcon from './assets/telegram.webp'
 import slackIcon from './assets/slack.webp'
+import tmdbIcon from './assets/integrations/tmdb.svg'
+import doubanIcon from './assets/integrations/douban.svg'
+import fanartIcon from './assets/integrations/fanart.png'
+import rtorrentIcon from './assets/integrations/rtorrent.svg'
+import qqIcon from './assets/integrations/qq.svg'
+import discordIcon from './assets/integrations/discord.svg'
+import synologyChatIcon from './assets/integrations/synologychat.png'
+import flycowIcon from './assets/integrations/fnnas.png'
+import ugreenNasIcon from './assets/integrations/ugreennas.png'
+import vocechatIcon from './assets/integrations/vocechat.png'
 import dashboardImage from './assets/dashboard.png'
 import rankingImage from './assets/ranking.png'
 import pluginImage from './assets/plugin.png'
@@ -461,11 +474,6 @@ const stopAutoSlide = () => {
 // 功能特性数据
 const features = ref([
   {
-    title: "丰富的插件生态",
-    description: "250+ 官方和社区插件，涵盖站点管理、通知推送、媒体处理等各个方面，满足不同用户需求",
-    iconSvg: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1V9a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V4a1 1 0 011-1h3a1 1 0 001-1v-1a2 2 0 114 0z" />'
-  },
-  {
     title: "智能搜索与订阅",
     description: "自动搜索和匹配电影、电视剧，智能订阅管理",
     iconSvg: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />'
@@ -488,7 +496,12 @@ const features = ref([
   {
     title: "多样化通知系统",
     description: "支持微信、Telegram、Slack等多种通知方式，及时了解整理进度和系统状态",
-    iconSvg: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19l5-5 5 5M4 7l5 5 5-5" />'
+    iconSvg: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />'
+  },
+  {
+    title: "内置智能助手",
+    description: "支持自然语言甚至语音控制自动化管理，直接下达搜索、订阅、下载、整理等操作指令，让常用流程更省心。",
+    iconSvg: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v4m-4 0h8a2 2 0 012 2v5a2 2 0 01-2 2H8a2 2 0 01-2-2v-5a2 2 0 012-2zm-2 4H4m16 0h-2M9 12h.01M15 12h.01M10 15h4" />'
   }
 ])
 
@@ -519,8 +532,14 @@ const pluginHighlights = ref([
 // 部署方式数据
 const deploymentMethods = ref([
   {
+    title: "CLI 安装",
+    description: "一键安装本地 CLI，适合 Linux、macOS 和本地调试环境",
+    icon: "⌨️",
+    command: "curl -fsSL https://raw.githubusercontent.com/jxxghp/MoviePilot/v2/scripts/bootstrap-local.sh | bash"
+  },
+  {
     title: "可执行文件",
-    description: "直接下载运行，适合 Widnows 用户",
+    description: "直接下载运行，适合 Windows 用户",
     icon: "💻",
     command: "# 下载并运行\nhttps://github.com/developer-wlj/Windows-MoviePilot/releases"
   },
@@ -540,14 +559,24 @@ const deploymentMethods = ref([
 
 // 集成服务数据
 const integrations = ref([
+  { name: "TheMovieDb", icon: tmdbIcon, invertOnDark: true },
+  { name: "豆瓣", icon: doubanIcon, invertOnDark: true },
+  { name: "Fanart", icon: fanartIcon },
   { name: "Plex", icon: plexIcon },
   { name: "Emby", icon: embyIcon },
   { name: "Jellyfin", icon: jellyfinIcon },
+  { name: "飞牛影视", icon: flycowIcon },
+  { name: "绿联", icon: ugreenNasIcon },
   { name: "qBittorrent", icon: qbittorrentIcon },
   { name: "Transmission", icon: transmissionIcon },
+  { name: "rTorrent", icon: rtorrentIcon },
   { name: "Wechat", icon: wechatIcon },
+  { name: "QQ", icon: qqIcon, invertOnDark: true },
   { name: "Telegram", icon: telegramIcon },
   { name: "Slack", icon: slackIcon },
+  { name: "Discord", icon: discordIcon, invertOnDark: true },
+  { name: "SynologyChat", icon: synologyChatIcon },
+  { name: "VoceChat", icon: vocechatIcon },
 ])
 
 // 组件挂载时启动自动轮播
